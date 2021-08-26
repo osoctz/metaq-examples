@@ -11,6 +11,7 @@
     <modules>
         <module>metaq-data-jpa-example</module>
         <module>metaq-data-mp-example</module>
+        <module>metaq-data-jdbc-example</module>
     </modules>
 
     <properties>
