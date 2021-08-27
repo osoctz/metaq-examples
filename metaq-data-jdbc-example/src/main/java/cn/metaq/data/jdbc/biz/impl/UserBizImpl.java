@@ -8,4 +8,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserBizImpl extends BaseBiz<User,User,Long, UserDao> implements UserBiz {
+
 }
