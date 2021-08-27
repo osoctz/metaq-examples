@@ -1,0 +1,36 @@
+POST http://localhost:7001/users/pages?limit=10&offset=0
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ1YWEiLCJzdWIiOiJhZG1pbiIsImF1ZCI6IndlYiIsImlhdCI6MTYzMDA3Mzg4MCwiZXhwIjoxNjMwMTYwMjgwfQ.HceSlN99wGU1oEdjgO_ki40bRY1RjJQHIIE9KfapLFwjfE4WfQ2U56BXuJzzrqGS3acuQU0E41aSUJD2e_Ryvw
+Content-Type: application/json
+
+{
+  "chain": {
+    "type": "AND",
+    "filters": [
+      {
+        "type": "EQ",
+        "name": "enabled",
+        "value": 1
+      }
+    ]
+  },
+  "sorts": [
+    {
+      "type": "DESC",
+      "name": "id"
+    }]
+}
+
+###
+GET http://localhost:7001/users/current
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ1YWEiLCJzdWIiOiJhZG1pbiIsImF1ZCI6IndlYiIsImlhdCI6MTYzMDA3Mzg4MCwiZXhwIjoxNjMwMTYwMjgwfQ.HceSlN99wGU1oEdjgO_ki40bRY1RjJQHIIE9KfapLFwjfE4WfQ2U56BXuJzzrqGS3acuQU0E41aSUJD2e_Ryvw
+
+###
+POST http://localhost:7001/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+###

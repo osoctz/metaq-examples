@@ -12,6 +12,7 @@
         <module>metaq-data-jpa-example</module>
         <module>metaq-data-mp-example</module>
         <module>metaq-data-jdbc-example</module>
+        <module>metaq-auth-security-example</module>
     </modules>
 
     <properties>
