@@ -5,6 +5,7 @@ import cn.metaq.data.jpa.BaseTemplate;
 import cn.metaq.example.jpa.biz.UserBiz;
 import cn.metaq.example.jpa.dto.UserDTO;
 import cn.metaq.example.jpa.dao.UserDao;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class UserBizImpl extends BaseBiz<UserDTO, UserDTO, Long, UserDao> implements UserBiz {
+public class UserBizImpl extends BaseBiz<UserDTO, Long, UserDao> implements UserBiz {
 
     @Resource
     private BaseTemplate template;
@@ -34,5 +35,10 @@ public class UserBizImpl extends BaseBiz<UserDTO, UserDTO, Long, UserDao> implem
         params.put("roleCode", roleCode);
 
         return template.list(UserDTO.class, jql, params);
+    }
+
+    @Override
+    public Specification map(UserDTO userDTO) {
+        return null;
     }
 }

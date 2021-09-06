@@ -8,7 +8,7 @@ import java.util.List;
 /**
  *
  */
-public interface UserBiz extends Biz<UserDTO, UserDTO, Long> {
+public interface UserBiz extends Biz<UserDTO, Long> {
 
     List<UserDTO> listUserByRole(String roleCode);
 }

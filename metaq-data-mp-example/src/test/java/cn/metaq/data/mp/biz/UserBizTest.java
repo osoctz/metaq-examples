@@ -22,7 +22,7 @@ public class UserBizTest {
     @Test
     public void testLoadAllUsers(){
 
-        List<User> users=userBiz.list();
+        List<User> users=userBiz.list(User.class);
         log.info(users);
         Assert.assertEquals(1,users.size());
     }

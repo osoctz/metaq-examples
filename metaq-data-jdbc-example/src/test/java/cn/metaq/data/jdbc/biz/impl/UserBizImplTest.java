@@ -22,7 +22,7 @@ public class UserBizImplTest {
     @Test
     public void testAll() {
 
-        List<User> users = userBiz.list();
+        List<User> users = userBiz.list(User.class);
 
         Assert.assertEquals(2, users.size());
     }

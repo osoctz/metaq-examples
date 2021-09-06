@@ -7,5 +7,5 @@ import cn.metaq.data.mp.entity.User;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserBizImpl extends BaseBiz<User,User,Long, UserDao> implements UserBiz {
+public class UserBizImpl extends BaseBiz<User,Long, UserDao> implements UserBiz {
 }
