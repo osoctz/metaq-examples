@@ -26,16 +26,15 @@ import java.util.stream.Collectors;
  * @since 1.0
  */
 @Service
-public class RoleBizImpl extends BaseBiz<RoleDTO, RoleDTO, Long, RoleDao> implements RoleBiz {
+public class RoleBizImpl extends BaseBiz<RoleDTO, Long, RoleDao> implements RoleBiz {
 
     @Override
-    public Pagination<RoleDTO> list(RoleDTO dto, int offset, int limit) {
-
+    public <R> Pagination<R> list(Class<R> resultClass, RoleDTO object, int offset, int limit) {
         Page<Role> page = null;
         Pageable pageable = PageRequest.of(offset / limit, limit);
 
-        if (dto != null) {
-            page = dao.findAll(this.map(dto), pageable);
+        if (object != null) {
+            page = dao.findAll(this.map(object), pageable);
         } else {
             page = dao.findAll(pageable);
         }
@@ -52,8 +51,34 @@ public class RoleBizImpl extends BaseBiz<RoleDTO, RoleDTO, Long, RoleDao> implem
             role.setCode(s.getCode());
             return role;
         }).collect(Collectors.toList()));
-        return pagination;
+        return (Pagination<R>) pagination;
     }
+
+//    public Pagination<Role> list(RoleDTO dto, int offset, int limit) {
+//
+//        Page<Role> page = null;
+//        Pageable pageable = PageRequest.of(offset / limit, limit);
+//
+//        if (dto != null) {
+//            page = dao.findAll(this.map(dto), pageable);
+//        } else {
+//            page = dao.findAll(pageable);
+//        }
+//
+//        Pagination<RoleDTO> pagination = new Pagination();
+//
+//        pagination.setOffset(offset);
+//        pagination.setLimit(limit);
+//        pagination.setTotal((int) page.getTotalElements());
+//        pagination.setData(page.getContent().stream().map(s -> {
+//
+//            RoleDTO role = new RoleDTO();
+//            role.setName(s.getName());
+//            role.setCode(s.getCode());
+//            return role;
+//        }).collect(Collectors.toList()));
+//        return pagination;
+//    }
 
     @Override
     public Specification map(RoleDTO dto) {

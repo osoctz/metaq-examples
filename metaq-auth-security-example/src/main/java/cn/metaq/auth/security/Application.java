@@ -3,7 +3,9 @@ package cn.metaq.auth.security;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
+@EnableScheduling
 @EnableCaching
 @SpringBootApplication(scanBasePackages = {"cn.metaq.auth.security","cn.metaq.uaa","cn.metaq.common.web"})
 public class Application {

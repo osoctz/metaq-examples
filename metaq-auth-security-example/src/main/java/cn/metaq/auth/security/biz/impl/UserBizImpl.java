@@ -3,7 +3,9 @@ package cn.metaq.auth.security.biz.impl;
 import cn.metaq.auth.security.biz.UserBiz;
 import cn.metaq.auth.security.dao.UserDao;
 import cn.metaq.auth.security.entity.User;
+import cn.metaq.common.core.qo.QueryWrapper;
 import cn.metaq.data.jpa.BaseBiz;
+import cn.metaq.data.jpa.QueryWrapperBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +21,7 @@ import java.util.Date;
  * @since 1.0
  */
 @Service
-public class UserBizImpl extends BaseBiz<User, User, Long, UserDao> implements UserBiz {
+public class UserBizImpl extends QueryWrapperBiz<User, Long, UserDao> implements UserBiz {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -33,7 +35,7 @@ public class UserBizImpl extends BaseBiz<User, User, Long, UserDao> implements U
     }
 
     @Override
-    public Specification map(User dto) {
+    public Specification map(QueryWrapper queryWrapper) {
         return null;
     }
 }

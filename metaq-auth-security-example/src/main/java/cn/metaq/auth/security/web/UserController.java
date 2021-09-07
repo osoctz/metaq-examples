@@ -31,7 +31,7 @@ public class UserController extends BaseController<UserBiz> {
     @PostMapping("pages")
     public Pagination<User> list(@RequestBody QueryWrapper query, int offset, int limit) {
 
-        return baseBiz.list(query, offset, limit);
+        return baseBiz.list(User.class,query, offset, limit);
     }
 
     @PostMapping

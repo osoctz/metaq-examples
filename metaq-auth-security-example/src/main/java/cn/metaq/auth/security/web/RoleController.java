@@ -23,6 +23,6 @@ public class RoleController extends BaseController<RoleBiz> {
     @PostMapping("pages")
     public Pagination<RoleDTO> list(@RequestBody(required = false) RoleDTO roleDTO, int offset, int limit) {
 
-        return baseBiz.list(roleDTO, offset, limit);
+        return baseBiz.list(RoleDTO.class,roleDTO, offset, limit);
     }
 }
