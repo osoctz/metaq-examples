@@ -14,6 +14,7 @@
         <module>metaq-data-jdbc-example</module>
         <module>metaq-auth-security-example</module>
         <module>metaq-data-mongo-example</module>
+        <module>metaq-component-filestore-example</module>
     </modules>
 
     <properties>
