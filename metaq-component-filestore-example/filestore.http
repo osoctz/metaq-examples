@@ -1,0 +1,31 @@
+POST http://localhost:80/api/item
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="field-name"
+
+field-value
+--WebAppBoundary--
+
+###
+POST http://localhost:7004/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="WX20210903-122255.png"
+
+< /Users/zantang/Desktop/ocr/WX20210903-122255.png
+--WebAppBoundary--
+
+--WebAppBoundary
+Content-Disposition: form-data; name="contentType"
+
+image/png
+--WebAppBoundary--
+
+--WebAppBoundary
+Content-Disposition: form-data; name="description"
+
+描述
+--WebAppBoundary--
+###

@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: oss
+  data:
+    mongodb:
+      uri: mongodb://localhost/oss_srv
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+
+server:
+  port: 7004
