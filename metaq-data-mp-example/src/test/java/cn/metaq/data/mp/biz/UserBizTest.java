@@ -1,5 +1,7 @@
 package cn.metaq.data.mp.biz;
 
+import cn.metaq.data.mp.dao.ext.UserExtDao;
+import cn.metaq.data.mp.dto.UserDTO;
 import cn.metaq.data.mp.entity.User;
 import lombok.extern.log4j.Log4j2;
 import org.junit.Assert;
@@ -19,11 +21,20 @@ public class UserBizTest {
     @Autowired
     private UserBiz userBiz;
 
+    @Autowired
+    private UserExtDao userExtDao;
+
     @Test
     public void testLoadAllUsers(){
 
         List<User> users=userBiz.list(User.class);
         log.info(users);
         Assert.assertEquals(1,users.size());
+    }
+
+    @Test
+    public void testXmlListUser(){
+        List<UserDTO> users=userExtDao.list();
+        log.info(users);
     }
 }
