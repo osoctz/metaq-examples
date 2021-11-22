@@ -1,0 +1,24 @@
+custom:
+  mq:
+    topic:
+      model:
+        task: MODEL-TASK-TOPIC
+        state: MODEL-TASK-STATE-TOPIC
+      excelmeta:
+        task: EXCELMETA-TASK-TOPIC
+        state: EXCELMETA-TASK-STATE-TOPIC
+      exceldata:
+        task: EXCELDATA-TASK-TOPIC
+        state: EXCELDATA-TASK-STATE-TOPIC
+      metadata:
+        task: METADATA-TASK-TOPIC
+        state: METADATA-TASK-STATE-TOPIC
+      tabledata:
+        task: TABLEDATA-TASK-TOPIC
+        state: TABLEDATA-TASK-STATE-TOPIC
+      datasource:
+        state: DATASOURCE-STATE-TOPIC
+rocketmq:
+  name-server: 192.168.2.5:9876
+server:
+  port: 9082

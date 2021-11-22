@@ -1,0 +1,63 @@
+spring:
+  application:
+    name:
+  #profiles: dev
+  datasource:
+    url: jdbc:mysql://42.193.42.240:3306/model_srv_v2?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2b8&rewriteBatchedStatements=true&generateSimpleParameterMetadata=true&serverTimezone=UTC
+    username: root
+    password: Gefei1234!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      initial-size: 5
+      max-active: 15
+      min-idle: 3
+      max-wait: 5000
+      pool-prepared-statements: true #打开PSCache，并且指定每个连接上PSCache的大小
+      max-pool-prepared-statement-per-connection-size: 20
+      #      validation-query: SELECT 'x'
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000 #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      min-evictable-idle-time-millis: 1800000  #配置一个连接在池中最小生存的时间，单位是毫秒
+      max-open-prepared-statements: 100
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 200
+  aop:
+    auto: true
+app:
+  name: ${spring.application.name}
+
+jwt:
+  header: Authorization
+  expires_in: 86400
+  mobile_expires_in: 86400
+  secret: qwertyuiop
+
+custom:
+  batch:
+    api:
+      ds-table: http://localhost:${server.port}/ds/tables
+      td-data: http://localhost:${server.port}/excelTask/resume
+    read:
+      page-size: 50
+    chunk-size: 50
+
+  thread-pool-factory:
+    corePoolSize: 5
+    maxPoolSize: 30
+    queueCapacity: 100
+    keepAliveSeconds: 120
+
+  file:
+    datasource:
+      schema: file_ds_srv
+  security:
+    enabled: true
+
+logging:
+  config: classpath:log4j2.yml
+server:
+  port: 9080

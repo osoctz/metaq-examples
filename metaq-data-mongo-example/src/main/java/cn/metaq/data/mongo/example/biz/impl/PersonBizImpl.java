@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 public class PersonBizImpl extends BaseBiz<Person,Integer> implements PersonBiz{
     @Override
     public Query map(Person person) {
+
+        Query.query()
         return null;
     }
 }

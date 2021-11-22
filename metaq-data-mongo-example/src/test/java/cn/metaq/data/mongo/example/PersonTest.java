@@ -56,4 +56,9 @@ public class PersonTest {
         //mongoTemplate.insert(data,"common_object");
         mongoTemplate.insert(data,HashMap.class);
     }
+
+    public void testQuery(){
+
+
+    }
 }
