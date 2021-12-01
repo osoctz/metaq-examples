@@ -1,41 +1,86 @@
 package cn.metaq.example.jpa.biz.impl;
 
-import cn.metaq.example.jpa.biz.UserBiz;
-import cn.metaq.example.jpa.dto.UserDTO;
-import cn.metaq.example.jpa.entity.User;
-import org.junit.Assert;
+import cn.metaq.example.jpa.model.dto.GroupDTO;
+import cn.metaq.example.jpa.model.dto.RoleDTO;
+import cn.metaq.example.jpa.model.dto.UserDTO;
+import cn.metaq.example.jpa.model.entity.QGroup;
+import cn.metaq.example.jpa.model.entity.QRole;
+import cn.metaq.example.jpa.model.entity.QUser;
+import cn.metaq.example.jpa.model.entity.QUserGroup;
+import cn.metaq.example.jpa.model.entity.QUserRole;
+import cn.metaq.example.jpa.model.entity.User;
+import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.List;
+import lombok.extern.log4j.Log4j2;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
+@Log4j2
 public class UserBizImplTest {
 
-    @Autowired
-    private UserBiz userBiz;
+  @Autowired
+  private JPAQueryFactory jqf;
 
-    /**
-     * 单表查询
-     */
-    @Test
-    public void testFindAll() {
+  @Test
+  public void unionDslQuery() {
 
-        List<User> userDTOList = userBiz.list(User.class);
+    QUser user = QUser.user;
+    QGroup group = QGroup.group;
+    QUserGroup userGroup = QUserGroup.userGroup;
 
-        Assert.assertEquals(userDTOList.size(), 1);
-    }
+    List<User> users = jqf.select(user)
+        .from(user)
+        .leftJoin(userGroup)
+        .on(user.id.eq(userGroup.userId))
+        .leftJoin(group)
+        .on(group.id.eq(userGroup.groupId))
+        .where(user.username.eq("admin"))
+        .fetch();
+
+    System.out.println(users);
+  }
 
 
-    @Test
-    public void testListUserByRole() {
+  @Test
+  public void customUnionDslQuery() {
 
-        List<UserDTO> userDTOList = userBiz.listUserByRole("admin");
+    QUser user = QUser.user;
+    QGroup group = QGroup.group;
+    QUserGroup userGroup = QUserGroup.userGroup;
 
-        Assert.assertEquals(userDTOList.size(), 1);
-    }
+    List<UserDTO> users = jqf.select(Projections.fields(UserDTO.class,user.id,user.username,Projections.bean(GroupDTO.class,group.id)))
+        .from(user)
+        .leftJoin(userGroup)
+        .on(user.id.eq(userGroup.userId))
+        .leftJoin(group)
+        .on(group.id.eq(userGroup.groupId))
+        .where(user.username.eq("admin"))
+        .fetch();
+
+    System.out.println(users);
+  }
+
+  @Test
+  public void one_to_many(){
+
+    QRole role=QRole.role;
+    QUserRole userRole=QUserRole.userRole;
+    QUser user=QUser.user;
+
+    List users=jqf.select(Projections.constructor(UserDTO.class,user.id,user.username,Projections.bean(RoleDTO.class,role.id,role.name)))
+        .from(user)
+        .leftJoin(userRole)
+        .on(user.id.eq(userRole.userId))
+        .leftJoin(role)
+        .on(role.id.eq(userRole.roleId))
+        .fetch();
+
+    log.info(users);
+  }
 }

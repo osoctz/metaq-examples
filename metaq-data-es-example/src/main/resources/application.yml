@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: es-demo
+
+es:
+  servers: 192.168.2.2:9200
+
+server:
+  port: 9081

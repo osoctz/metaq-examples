@@ -1,6 +1,8 @@
 package cn.metaq.data.mp.entity;
 
 import cn.metaq.common.core.IEntity;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +12,7 @@ import lombok.Setter;
 @TableName(value = "t_id_user")
 public class User implements IEntity<Long> {
 
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /**

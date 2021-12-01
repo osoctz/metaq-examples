@@ -24,6 +24,6 @@ public class UserBizImpl extends BaseBiz<User,UserQo,Long, UserDao> implements U
       qw.eq("username",userQo.getName());
     }
 
-    return null;
+    return qw;
   }
 }

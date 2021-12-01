@@ -1,0 +1,7 @@
+spring:
+  data:
+    neo4j:
+      username: neo4j
+      password: bailian@neo4j
+  neo4j:
+    uri: neo4j://bailian-aliyun-crawler1.bl-ai.com:27687
