@@ -19,4 +19,9 @@ public class ColumnFunction {
   public static boolean isEmail(){
     return true;
   }
+
+  public static boolean compare(String raw,String target){
+    System.out.println("raw = " + raw+", target="+target);
+    return false;
+  }
 }

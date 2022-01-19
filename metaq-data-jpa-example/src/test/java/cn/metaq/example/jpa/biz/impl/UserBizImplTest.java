@@ -1,5 +1,6 @@
 package cn.metaq.example.jpa.biz.impl;
 
+import cn.metaq.example.jpa.biz.UserBiz;
 import cn.metaq.example.jpa.model.dto.GroupDTO;
 import cn.metaq.example.jpa.model.dto.RoleDTO;
 import cn.metaq.example.jpa.model.dto.UserDTO;
@@ -26,6 +27,9 @@ public class UserBizImplTest {
 
   @Autowired
   private JPAQueryFactory jqf;
+
+  @Autowired
+  private UserBiz userBiz;
 
   @Test
   public void unionDslQuery() {
@@ -82,5 +86,14 @@ public class UserBizImplTest {
         .fetch();
 
     log.info(users);
+  }
+
+  @Test
+  public void save(){
+
+    User user=new User();
+
+    user.setEmail("#Functions.checkNull(#name) && (#Functions.checkNull(#tags) || #Functions.compareTo(#createdTs, #updatedTs))?#Functions.skipRow(#row):#Functions.tagRow(#row)");
+    userBiz.save(user);
   }
 }

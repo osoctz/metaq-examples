@@ -1,0 +1,4 @@
+spring:
+  kafka:
+    bootstrap-servers: bailian-aliyun-cdh3.bl-ai.com:19092
+    consumer.group-id: myGroup
