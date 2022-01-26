@@ -1,7 +1,13 @@
 package cn.metaq.data.mongo.example;
 
 import cn.metaq.data.mongo.example.dao.ColumnInfoDao;
+import cn.metaq.data.mongo.example.dao.TableDataInfoDao;
 import cn.metaq.data.mongo.example.entity.ColumnInfo;
+import cn.metaq.data.mongo.example.entity.TableDataInfo;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +21,9 @@ public class NestTest {
 
   @Autowired
   private ColumnInfoDao columnInfoDao;
+
+  @Autowired
+  private TableDataInfoDao tableDataInfoDao;
 
   @Test
   public void testAdd(){
@@ -73,5 +82,26 @@ public class NestTest {
 
       System.out.println(s);
     });
+  }
+
+  @Test
+  public void test4(){
+
+    TableDataInfo tableDataInfo=new TableDataInfo();
+    tableDataInfo.setTableId("12312312");
+
+    Map<String,Object> nested=new HashMap<>();
+    nested.put("name","nested_tz");
+
+    Map<String,Object> simpleData=new HashMap<>();
+    simpleData.put("name","tz");
+    simpleData.put("nested",nested);
+
+    List l=new ArrayList();
+    l.add(simpleData);
+
+    tableDataInfo.setSampleData(l);
+
+    tableDataInfoDao.save(tableDataInfo);
   }
 }

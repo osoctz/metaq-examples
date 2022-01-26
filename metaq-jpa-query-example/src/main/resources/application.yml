@@ -2,7 +2,7 @@ spring:
   application:
     name: query-example
   jpa:
-    database: mysql
+    database: postgresql
     show-sql: true
     properties:
       hibernate:
@@ -10,10 +10,11 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/model_srv?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
-    username: root
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://bailian-aliyun-cdh2.bl-ai.com:15432/report_db
+    username: postgres
     password: 123456
 
 server:
