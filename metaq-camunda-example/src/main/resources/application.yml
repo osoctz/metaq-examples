@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: camunda-example
+  jpa:
+    database: mysql
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/camunda?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+
+camunda:
+  bpm:
+    # 配置账户密码来访问Camunda自带的管理界面
+    admin-user:
+      id: admin
+      password: admin
+      first-name: admin
+    filter:
+      create: All tasks
+    #指定数据库类型
+    #禁止自动部署resources下面的bpmn文件
+    auto-deployment-enabled: false
+    #禁止index跳转到Camunda自带的管理界面，默认true
+    database:
+      type: mysql
+#    webapp:
+#      index-redirect-enabled: false
+
+server:
+  port: 8081
