@@ -47,16 +47,16 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <dependency>
-      <groupId>cn.metaq.boot</groupId>
-      <artifactId>metaq-boot-starter-task</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-logging</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>cn.metaq.boot</groupId>-->
+<!--      <artifactId>metaq-boot-starter-task</artifactId>-->
+<!--      <exclusions>-->
+<!--        <exclusion>-->
+<!--          <groupId>org.springframework.boot</groupId>-->
+<!--          <artifactId>spring-boot-starter-logging</artifactId>-->
+<!--        </exclusion>-->
+<!--      </exclusions>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>cn.metaq.boot</groupId>
       <artifactId>metaq-boot-starter-iam</artifactId>
