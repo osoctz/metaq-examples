@@ -70,4 +70,11 @@ public class SampleTest {
 
     System.out.println(message);
   }
+
+  @Test
+  public void test5(){
+    String s= "jdbc:mysql://bailian-aliyun-test1.bl-ai.com:3306/db_tulufan?autoReconnect=true&useSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
+
+    String[] a=s.split("\\?");
+  }
 }

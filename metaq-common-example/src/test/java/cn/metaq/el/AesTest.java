@@ -41,7 +41,7 @@ public class AesTest {
     String iv = AESUtils.initIV();
     System.out.println("生成初始向量：" + iv);
     String content = "zb@@1234";  // 待加密内容
-    String encrypt = AESUtils.encrypt(content, key, iv);
+    String encrypt = AESUtils.encrypt(content, "1hscHZAQnhh82rYr", "06dEqwWIAGx2TxHk");
     System.out.println("明文内容："+ content);
     System.out.println("加密结果："+ encrypt);
     System.out.println("解密结果："+ AESUtils.decrypt(encrypt, key, iv));
