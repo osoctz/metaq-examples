@@ -10,9 +10,12 @@ import cn.metaq.example.jpa.model.entity.QUser;
 import cn.metaq.example.jpa.model.entity.QUserGroup;
 import cn.metaq.example.jpa.model.entity.QUserRole;
 import cn.metaq.example.jpa.model.entity.User;
+import com.querydsl.core.group.GroupBy;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.extern.log4j.Log4j2;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,7 +61,8 @@ public class UserBizImplTest {
     QGroup group = QGroup.group;
     QUserGroup userGroup = QUserGroup.userGroup;
 
-    List<UserDTO> users = jqf.select(Projections.fields(UserDTO.class,user.id,user.username,Projections.bean(GroupDTO.class,group.id)))
+    List<UserDTO> users = jqf.select(
+            Projections.fields(UserDTO.class, user.id, user.username, Projections.bean(GroupDTO.class, group.id)))
         .from(user)
         .leftJoin(userGroup)
         .on(user.id.eq(userGroup.userId))
@@ -71,29 +75,56 @@ public class UserBizImplTest {
   }
 
   @Test
-  public void one_to_many(){
+  public void one_to_many() {
 
-    QRole role=QRole.role;
-    QUserRole userRole=QUserRole.userRole;
-    QUser user=QUser.user;
+    QRole role = QRole.role;
+    QUserRole userRole = QUserRole.userRole;
+    QUser user = QUser.user;
 
-    List users=jqf.select(Projections.constructor(UserDTO.class,user.id,user.username,Projections.bean(RoleDTO.class,role.id,role.name)))
+    List<UserDTO> users = jqf.select(Projections.bean(UserDTO.class, user.id, user.username))
         .from(user)
         .leftJoin(userRole)
         .on(user.id.eq(userRole.userId))
         .leftJoin(role)
         .on(role.id.eq(userRole.roleId))
-        .fetch();
+        .transform(GroupBy.groupBy(user.id)
+            .as(Projections.bean(UserDTO.class, user.id, user.username,
+            GroupBy.list(Projections.bean(RoleDTO.class, role.id, role.name)
+                    .skipNulls())//忽略空对象
+                .as("roles"))))
+        .values()
+        .stream()
+        .collect(Collectors.toList());
+//        .fetch();
 
     log.info(users);
   }
 
+//  @Test
+//  public void one_to_one(){
+//
+//    QRole role=QRole.role;
+//    QUserRole userRole=QUserRole.userRole;
+//    QUser user=QUser.user;
+//
+//    List users=jqf.select(Projections.constructor(UserDTO.class,user.id,user.username,Projections.bean(RoleDTO.class,role.id,role.name)))
+//        .from(user)
+//        .leftJoin(userRole)
+//        .on(user.id.eq(userRole.userId))
+//        .leftJoin(role)
+//        .on(role.id.eq(userRole.roleId))
+//        .fetch();
+//
+//    log.info(users);
+//  }
+
   @Test
-  public void save(){
+  public void save() {
 
-    User user=new User();
+    User user = new User();
 
-    user.setEmail("#Functions.checkNull(#name) && (#Functions.checkNull(#tags) || #Functions.compareTo(#createdTs, #updatedTs))?#Functions.skipRow(#row):#Functions.tagRow(#row)");
+    user.setEmail(
+        "#Functions.checkNull(#name) && (#Functions.checkNull(#tags) || #Functions.compareTo(#createdTs, #updatedTs))?#Functions.skipRow(#row):#Functions.tagRow(#row)");
     userBiz.save(user);
   }
 }

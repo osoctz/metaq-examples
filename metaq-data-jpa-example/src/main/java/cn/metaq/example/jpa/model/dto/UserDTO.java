@@ -22,12 +22,19 @@ public class UserDTO implements Serializable{
 	/** 用户名 */
 	private String username;
 
-	private RoleDTO roles;
+	private List<RoleDTO> roles;
 
 //	private List<GroupDTO> groups;
 
+	public UserDTO() {
+	}
 
-	public UserDTO(Long id, String username, RoleDTO roles) {
+//	public UserDTO(Long id, String username) {
+//		this.id = id;
+//		this.username = username;
+//	}
+
+	public UserDTO(Long id, String username, List<RoleDTO> roles) {
 		this.id = id;
 		this.username = username;
 		this.roles = roles;
