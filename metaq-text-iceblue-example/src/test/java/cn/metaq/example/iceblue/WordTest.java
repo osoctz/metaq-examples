@@ -10,6 +10,10 @@ import com.spire.doc.documents.DocumentObjectType;
 import com.spire.doc.documents.Paragraph;
 import com.spire.doc.fields.Comment;
 import com.spire.doc.fields.TextRange;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import org.junit.Test;
@@ -64,7 +68,7 @@ public class WordTest {
   }
 
   @Test
-  public void test3(){
+  public void test3() throws FileNotFoundException {
     String path = "/Users/zantang/IdeaProjects/metaq-examples/metaq-poi-example/files/1.docx";
     System.out.println("----------段落-----------");
     spireParaghDoc(path);
@@ -73,7 +77,7 @@ public class WordTest {
   }
 
   //读取段落
-  public static void spireParaghDoc(String path) {
+  public static void spireParaghDoc(String path) throws FileNotFoundException {
     Document doc = new Document(path);
     for (int i = 0; i < doc.getSections().getCount(); i++) {
       System.out.println("第 " + i+"节");

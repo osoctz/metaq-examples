@@ -1000,8 +1000,9 @@ public class DiffMatchPatchTest {
     DiffMatchPatch dmp = new DiffMatchPatch();
     LinkedList<DiffMatchPatch.Diff> diff = dmp.diff_main("Hello World.", "Goodbye World.");
     // Result: [(-1, "Hell"), (1, "G"), (0, "o"), (1, "odbye"), (0, " World.")]
-    dmp.diff_cleanupSemantic(diff);
+    //dmp.diff_cleanupSemantic(diff);
+    String html=dmp.diff_prettyHtml(diff);
     // Result: [(-1, "Hello"), (1, "  bye"),    vb (0, " World.")]
-    System.out.println(diff);
+    System.out.println(html);
   }
 }
